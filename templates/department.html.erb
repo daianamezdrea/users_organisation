@@ -1,0 +1,71 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="../css/department.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(
+            function() {
+                var coll = document.getElementsByClassName("collapsible");
+                var i;
+                for (i = 0; i < coll.length; i++) {
+                    coll[i].addEventListener("click", function() {
+                        this.classList.toggle("active");
+                        var content = this.nextElementSibling;
+                        if (content.style.maxHeight) {
+                            content.style.maxHeight = null;
+                        } else {
+                            content.style.maxHeight = content.scrollHeight + "px";
+                        }
+                    });
+                }
+            });
+    </script>
+</head>
+
+<body>
+<div class="section-header">
+     <h3>Departments</h3>
+     <p>Meet our executive team</p>
+</div>
+<div class="container p-5">
+   <div class="row_executive">
+      <% department_info["Executive"].each do |user,v| %> 
+      <div class="column wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+         <div class="member">
+            <img class="image_fluid" alt="Not found" src='<%= user[:photo] %>' >
+            <div class="member-info">
+               <div class="member-info-content">
+                  <h2><%= user[:name_user] %></h2>
+                  <p class="title_executive"><%= user[:title] %></p>
+               </div>
+            </div>
+         </div>
+      </div>
+      <% end %>
+   </div>
+</div>
+<br>
+     <h3>Departments:</h3>
+    <% department_info.each do |department, info| %>
+        <% if department != 'Executive' %>
+            <button class="collapsible"><%= department %></button>
+            <div class="content">
+                <div class="row-executive">
+                    <% info.each do |user,v| %>
+                        <div class="column">
+                            <div class="card_executive">
+                                <img class="image_users" src='<%= user[:photo] %>'>
+                                <div class="container">
+                                    <h2 class="user_name"><%= user[:name_user] %></h2>
+                                    <p class="title"><%= user[:title] %></p>
+                                </div>
+                            </div>
+                        </div>
+                    <%end%>
+                </div>
+            </div>
+         <% end %>
+    <% end %>
+</body>
+</html>

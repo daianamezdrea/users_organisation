@@ -1,0 +1,46 @@
+<html>
+<head>
+<script src="https://balkan.app/js/OrgChart.js"></script>
+<link rel="stylesheet" href="../css/org_chart.css">
+</head>
+<body>
+<div class="container" id="orgchart"></div>
+</body>
+<script type="text/javascript"> 
+OrgChart.templates.group.min = Object.assign({}, OrgChart.templates.group);
+OrgChart.templates.group.min.name = '<text data-width="230" data-text-overflow="multiline" style="font-size: 24px;" fill="#aeaeae" x="125" y="65" text-anchor="middle">{val}</text>';
+OrgChart.scroll.smooth = 5;
+OrgChart.scroll.speed = 5;  
+    
+        var chart = new OrgChart(document.getElementById("orgchart"), {
+            
+            nodeBinding: {
+                field_0: 'name',
+                field_1: "department",
+                field_2: "title",
+                img_0: "img"
+
+            },
+            collapse: {
+               level: 2,
+               allChildren: true
+            }
+        });
+           var nodes = [
+                <% users_info.each do |user|%>
+                { id: "<%= user[:id_user] %>", pid: "<%=user[:manager_id] %>",  department: "<%= user[:department] %>", name: "<%= user[:name_user] %>", img: "<%= user[:photo] %>", title: "<%= user[:title] %>" },
+                <% end %>
+            ];    
+        chart.on('click', function (sender, args) {
+                if (args.node.min) {
+                    sender.maximize(args.node.id);
+                }
+                else {
+                    sender.minimize(args.node.id);
+                }
+                return false;
+        });
+
+            chart.load(nodes);
+</script>   
+</html>

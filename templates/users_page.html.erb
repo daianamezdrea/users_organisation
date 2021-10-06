@@ -1,0 +1,52 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="../css/users.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <script src="../js/users.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(
+        function (){
+            $('.accordion-toggle').click(function(){
+        $('.hiddenRow').hide();
+        $(this).next('tr').find('.hiddenRow').show();
+        });
+      });
+    </script>
+
+</head>
+<body>
+   <div class="header">Users</div>
+  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search..." title="Type in a name">
+   <table id="users_table" class = "sampleTable" style="border-collapse:collapse;">
+       <thead>
+         <th>Picture</th>
+         <th>Name</th>
+         <th>Title</th>
+         <th>Email</th>
+         <th>Department</th>
+      </thead>
+      <% users_info.each do |user| %>  
+      <tr data-toggle="collapse" data-target='#<%= user[:id_user] %>' class="accordion-toggle">
+         <td><img src='<%= user[:photo] %>'></td>
+         <td><%= user[:name_user] %></td>
+         <td><%= user[:title] %></td>
+         <td style="text-align:center"><%= user[:email_user] %></td>
+         <td style="text-align:center"><%= user[:department] %></td>
+      </tr>
+      <tr>
+<td class="hiddenRow">
+<div class="accordion-body collapse p-3" id='<%= user[:id_user] %>'>
+<p>Department : <span><%= user[:department] %></span></p>
+</div>
+</td>
+</tr>
+<% end %>
+</table>
+</div>
+</body>
+</html>

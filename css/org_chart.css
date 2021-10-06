@@ -1,0 +1,22 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    /* overflow: hidden; */
+    font-family: Helvetica;
+}
+
+.container {
+    position: fixed;
+}
+
+[data-n-id] rect {
+    fill: #327a81;
+}
+
+#orgchart {
+    width: 100%;
+    height: 100%;
+}
