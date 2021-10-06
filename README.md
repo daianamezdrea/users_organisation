@@ -1,4 +1,3 @@
-# users_organisation
 Users organisation
 ====================
 This is a representation of users information provided by the challenge 
