@@ -6,11 +6,20 @@ require 'net/http'
 require 'json'
 require 'erb'
 
-uri = URI('https://onebox.demo.aserto.com/api/v1/dir/users?page.size=10&page.token=')
-response = Net::HTTP.get_response(uri)
-if response.is_a?(Net::HTTPSuccess)
-  output = response.body.gsub(/\n/, '')
-  parsed = JSON.parse(output)
+# uri = URI('https://onebox.demo.aserto.com/api/v1/dir/users?page.size=10&page.token=')
+# response = Net::HTTP.get_response(uri)
+# if response.is_a?(Net::HTTPSuccess)
+#   output = response.body.gsub(/\n/, '')
+#   parsed = JSON.parse(output)
+# end
+def call_api(next_token)
+  uri = URI("https://onebox.demo.aserto.com/api/v1/dir/users?page.size=10&page.token=#{next_token}")
+  response = Net::HTTP.get_response(uri)
+  if response.is_a?(Net::HTTPSuccess)
+    output = response.body.gsub(/\n/, '')
+    parsed = JSON.parse(output)
+  end
+  return parsed
 end
 
 departments = []
@@ -27,28 +36,23 @@ def collect_data(parsed, users_info)
       'department': result['attributes']['properties']['department'],
       'title': result['attributes']['properties']['title'],
       'photo': result['picture'],
-      'manager_id': result['attributes']['properties']['manager'],
-      
+      'manager_id': result['attributes']['properties']['manager'],     
     }
   end
 end
 
-def get_next(parsed, users_info)
+def get_next(users_info)
+  parsed = call_api('')
   next_token = parsed['page']['next_token']
   collect_data(parsed, users_info)
   while next_token != ''
-    uri = URI("https://onebox.demo.aserto.com/api/v1/dir/users?page.size=10&page.token=#{next_token}")
-    response = Net::HTTP.get_response(uri)
-    if response.is_a?(Net::HTTPSuccess)
-      output = response.body.gsub(/\n/, '')
-      parsed = JSON.parse(output)
-    end
+   parsed = call_api(next_token)
     collect_data(parsed, users_info)
     next_token = parsed['page']['next_token']
   end
 end
 
-get_next(parsed, users_info)
+get_next(users_info)
 
 department_info = users_info.group_by { |x| x[:department] }
 
