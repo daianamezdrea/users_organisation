@@ -5,7 +5,6 @@ require 'uri'
 require 'net/http'
 require 'json'
 require 'erb'
-require 'fileutils'
 
 uri = URI('https://onebox.demo.aserto.com/api/v1/dir/users?page.size=10&page.token=')
 response = Net::HTTP.get_response(uri)
@@ -21,6 +20,7 @@ users_info = []
 def collect_data(parsed, users_info)
   parsed['results'].each do |result|
     users_info << {
+      'enabled': result['enabled'],
       'id_user': result['id'],
       'name_user': result['display_name'],
       'email_user': result['email'],
@@ -28,8 +28,7 @@ def collect_data(parsed, users_info)
       'title': result['attributes']['properties']['title'],
       'photo': result['picture'],
       'manager_id': result['attributes']['properties']['manager'],
-      'enabled': result['enabled'],
-      'permision': result['attributes']['properties']['permissions']
+      
     }
   end
 end
