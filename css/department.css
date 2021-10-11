@@ -50,11 +50,11 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    border: 5px solid #327a81;
+    border: 5px solid #277F82;
 }
 
 .collapsible {
-    background-color: #327a81;
+    background-color: #277F82;
     color: white;
     cursor: pointer;
     padding: 18px;
@@ -66,6 +66,7 @@
     font-weight: bold;
     display: flex;
     flex-direction: row;
+    font-family: 'Roboto';
 }
 
 .active,
@@ -101,10 +102,11 @@
 
 .section-header h3 {
     font-size: 36px;
-    color: #283d50;
+    color: #277F82;
     text-align: center;
     font-weight: 500;
-    position: relative
+    position: relative;
+    font-family: 'Roboto';
 }
 
 .section-header p {
@@ -112,8 +114,9 @@
     margin: auto;
     font-size: 25px;
     padding-bottom: 60px;
-    color: #556877;
-    width: 50%
+    color: #277F82;
+    width: 50%;
+    font-family: 'Roboto';
 }
 
 .user_name {
@@ -121,12 +124,6 @@
     color: #283d50;
     text-align: center;
     position: relative
-}
-
-.p {
-    font-size: 0.6rem;
-    color: #b3bfc8;
-    width: 50%
 }
 
 .fadeInUp {
@@ -165,7 +162,7 @@
 
 .member .member-info-content {
     margin-top: 50px;
-    transition: margin 0.2s
+    transition: margin 0.2s;
 }
 
 .member:hover .member-info {
@@ -186,4 +183,9 @@
 .title_executive {
     color: rgb(206, 198, 198);
     font-size: 0.8rem;
+    font-family: 'Roboto';
+}
+
+h2.roboto {
+    font-family: 'Roboto';
 }
