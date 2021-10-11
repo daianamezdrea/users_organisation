@@ -36,7 +36,8 @@ def collect_data(parsed, users_info)
       'department': result['attributes']['properties']['department'],
       'title': result['attributes']['properties']['title'],
       'photo': result['picture'],
-      'manager_id': result['attributes']['properties']['manager'],     
+      'manager_id': result['attributes']['properties']['manager'], 
+      'details': result    
     }
   end
 end
