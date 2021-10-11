@@ -4,11 +4,11 @@ function myFunction() {
     input = document.getElementById("myInput");
     filter = input.value.toUpperCase();
     table = document.getElementById("users_table");
-    tr = table.getElementsByTagName("tr");
+    tr = table.querySelectorAll("tr[data-toggle='collapse']");
     td = table.getElementsByTagName("td");
 
     // Loop through all table rows, and hide those who don't match the search query
-    for (i = 1; i < tr.length; i++) {
+    for (i = 0; i < tr.length; i++) {
         var found = false;
         for (j = 1; j < td.length; j++) {
             td1 = tr[i].getElementsByTagName("td")[j];
