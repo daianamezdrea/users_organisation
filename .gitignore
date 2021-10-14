@@ -1,0 +1,7 @@
+# Ignore Mac system files
+.DS_store
+
+# Ignore generated html files
+department.html
+org_chart.html
+users_page.html
